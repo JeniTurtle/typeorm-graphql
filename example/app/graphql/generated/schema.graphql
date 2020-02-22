@@ -1,0 +1,3360 @@
+interface BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+}
+
+type BaseModel implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+}
+
+type BaseModelUUID implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+}
+
+input BaseWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+}
+
+input BindRoleMenuInput {
+  roleId: String!
+  menuIds: [String!]!
+}
+
+input BindRolePermissionInput {
+  roleId: String!
+  permissionIds: [String!]!
+}
+
+input BindUserMenuInput {
+  userId: String!
+  menuIds: [String!]!
+}
+
+input BindUserPermissionInput {
+  userId: String!
+  permissionIds: [String!]!
+}
+
+input BindUserRoleInput {
+  userId: String!
+  roleIds: [String!]!
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type Department implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """部门名称"""
+  departmentName: String!
+
+  """所在地区"""
+  location: String
+
+  """部门顺序"""
+  departmentOrder: Int
+
+  """上级部门"""
+  supreior: Department
+
+  """上级部门"""
+  supreiorId: String
+
+  """所属机构"""
+  organization: Organization
+
+  """所属机构"""
+  organizationId: String
+}
+
+input DepartmentCreateInput {
+  departmentName: String!
+  location: String
+  departmentOrder: Float
+  supreiorId: String
+  organizationId: String
+}
+
+"""部门列表视图"""
+type DepartmentList {
+  """列表信息"""
+  rows: [Department!]!
+
+  """记录总数，用来做分页"""
+  count: Int!
+}
+
+enum DepartmentOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  departmentName_ASC
+  departmentName_DESC
+  location_ASC
+  location_DESC
+  departmentOrder_ASC
+  departmentOrder_DESC
+  supreiorId_ASC
+  supreiorId_DESC
+  organizationId_ASC
+  organizationId_DESC
+}
+
+input DepartmentUpdateInput {
+  departmentName: String
+  location: String
+  departmentOrder: Float
+  supreiorId: String
+  organizationId: String
+}
+
+input DepartmentWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  departmentName_eq: String
+  departmentName_contains: String
+  departmentName_startsWith: String
+  departmentName_endsWith: String
+  departmentName_in: [String!]
+  location_eq: String
+  location_contains: String
+  location_startsWith: String
+  location_endsWith: String
+  location_in: [String!]
+  departmentOrder_eq: Float
+  departmentOrder_gt: Float
+  departmentOrder_gte: Float
+  departmentOrder_lt: Float
+  departmentOrder_lte: Float
+  departmentOrder_in: [Int!]
+  supreiorId_eq: ID
+  supreiorId_in: [ID!]
+  organizationId_eq: ID
+  organizationId_in: [ID!]
+}
+
+input DepartmentWhereUniqueInput {
+  id: String!
+}
+
+type K12Application implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """应用名称"""
+  name: String!
+
+  """应用编号"""
+  code: String!
+
+  """备注"""
+  remark: String
+
+  """应用状态，0正常、1禁用"""
+  status: K12ApplicationStatus
+  moduleCategorys: [K12Module!]
+  powerCategorys: [K12PowerCategory!]
+}
+
+input K12ApplicationCreateInput {
+  name: String!
+  code: String!
+  remark: String
+  status: K12ApplicationStatus!
+}
+
+enum K12ApplicationStatus {
+  NORMAL
+  DISABLE
+}
+
+input K12ApplicationUpdateInput {
+  name: String
+  code: String
+  remark: String
+  status: K12ApplicationStatus
+}
+
+input K12ApplicationWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  code_eq: String
+  code_contains: String
+  code_startsWith: String
+  code_endsWith: String
+  code_in: [String!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  status_eq: K12ApplicationStatus
+  status_in: [K12ApplicationStatus!]
+}
+
+input K12ApplicationWhereUniqueInput {
+  id: String!
+}
+
+type K12Module implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """模块名称"""
+  name: String!
+
+  """模块编号"""
+  code: String!
+
+  """备注"""
+  remark: String
+
+  """排序"""
+  order: Int
+
+  """所属分类"""
+  categoryId: String
+
+  """是否为分类，0否、1是"""
+  isCategory: K12ModuleIsCategory
+
+  """模块状态，0正常、1禁用"""
+  status: K12ModuleStatus
+
+  """上级模块"""
+  superior: K12Module
+
+  """上级模块"""
+  superiorId: String
+
+  """所属应用"""
+  application: K12Application
+
+  """所属应用"""
+  applicationId: String
+  moduleGroupMappings: [K12ModuleGroupMapping!]
+  schoolModuleMappings: [K12SchoolModuleMapping!]
+  powerModuleMappings: K12PowerModuleMapping
+}
+
+input K12ModuleCreateInput {
+  name: String!
+  code: String!
+  remark: String
+  order: Float!
+  categoryId: String
+  isCategory: K12ModuleIsCategory!
+  status: K12ModuleStatus!
+  superiorId: String
+  applicationId: String
+}
+
+type K12ModuleGroup implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """角色名称"""
+  name: String!
+
+  """角色编号"""
+  code: String!
+
+  """备注"""
+  remark: String
+
+  """角色级别"""
+  level: Int!
+
+  """学校ID"""
+  schoolId: Int!
+
+  """角色状态，0正常、1禁用"""
+  status: K12ModuleGroupStatus
+
+  """是否为系统角色，0否、1是"""
+  systemDefault: K12ModuleGroupSystemDefault
+
+  """是否为学校角色，0否、1是"""
+  schoolDefault: K12ModuleGroupSchoolDefault
+
+  """是否为新用户角色，0否、1是"""
+  newUserDefault: K12ModuleGroupNewUserDefault
+
+  """角色组ID"""
+  roleGroup: K12RoleGroup
+
+  """角色组ID"""
+  roleGroupId: String!
+
+  """原始ID"""
+  original: K12ModuleGroup
+
+  """原始ID"""
+  originalId: String
+  moduleGroupMappings: [K12ModuleGroupMapping!]
+  userModuleGroupMappings: [K12UserModuleGroupMapping!]
+}
+
+input K12ModuleGroupCreateInput {
+  name: String!
+  code: String!
+  remark: String
+  level: Float!
+  schoolId: String!
+  status: K12ModuleGroupStatus!
+  systemDefault: K12ModuleGroupSystemDefault!
+  schoolDefault: K12ModuleGroupSchoolDefault!
+  newUserDefault: K12ModuleGroupNewUserDefault!
+  roleGroupId: String!
+  originalId: String
+}
+
+type K12ModuleGroupMapping implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """模块ID"""
+  module: K12Module
+
+  """模块ID"""
+  moduleId: String!
+
+  """模块组ID"""
+  moduleGroup: K12ModuleGroup
+
+  """模块组ID"""
+  moduleGroupId: String!
+}
+
+input K12ModuleGroupMappingCreateInput {
+  moduleId: String!
+  moduleGroupId: String!
+}
+
+input K12ModuleGroupMappingUpdateInput {
+  moduleId: String
+  moduleGroupId: String
+}
+
+input K12ModuleGroupMappingWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  moduleId_eq: ID
+  moduleId_in: [ID!]
+  moduleGroupId_eq: ID
+  moduleGroupId_in: [ID!]
+}
+
+input K12ModuleGroupMappingWhereUniqueInput {
+  id: String!
+}
+
+enum K12ModuleGroupNewUserDefault {
+  NO
+  YES
+}
+
+enum K12ModuleGroupSchoolDefault {
+  NO
+  YES
+}
+
+enum K12ModuleGroupStatus {
+  NORMAL
+  DISABLE
+}
+
+enum K12ModuleGroupSystemDefault {
+  NO
+  YES
+}
+
+input K12ModuleGroupUpdateInput {
+  name: String
+  code: String
+  remark: String
+  level: Float
+  schoolId: String
+  status: K12ModuleGroupStatus
+  systemDefault: K12ModuleGroupSystemDefault
+  schoolDefault: K12ModuleGroupSchoolDefault
+  newUserDefault: K12ModuleGroupNewUserDefault
+  roleGroupId: String
+  originalId: String
+}
+
+input K12ModuleGroupWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  code_eq: String
+  code_contains: String
+  code_startsWith: String
+  code_endsWith: String
+  code_in: [String!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  level_eq: Float
+  level_gt: Float
+  level_gte: Float
+  level_lt: Float
+  level_lte: Float
+  level_in: [Int!]
+  schoolId_eq: ID
+  schoolId_in: [ID!]
+  status_eq: K12ModuleGroupStatus
+  status_in: [K12ModuleGroupStatus!]
+  systemDefault_eq: K12ModuleGroupSystemDefault
+  systemDefault_in: [K12ModuleGroupSystemDefault!]
+  schoolDefault_eq: K12ModuleGroupSchoolDefault
+  schoolDefault_in: [K12ModuleGroupSchoolDefault!]
+  newUserDefault_eq: K12ModuleGroupNewUserDefault
+  newUserDefault_in: [K12ModuleGroupNewUserDefault!]
+  roleGroupId_eq: ID
+  roleGroupId_in: [ID!]
+  originalId_eq: ID
+  originalId_in: [ID!]
+}
+
+input K12ModuleGroupWhereUniqueInput {
+  id: String!
+}
+
+enum K12ModuleIsCategory {
+  NO
+  YES
+}
+
+enum K12ModuleStatus {
+  NORMAL
+  DISABLE
+}
+
+input K12ModuleUpdateInput {
+  name: String
+  code: String
+  remark: String
+  order: Float
+  categoryId: String
+  isCategory: K12ModuleIsCategory
+  status: K12ModuleStatus
+  superiorId: String
+  applicationId: String
+}
+
+input K12ModuleWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  code_eq: String
+  code_contains: String
+  code_startsWith: String
+  code_endsWith: String
+  code_in: [String!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  order_eq: Float
+  order_gt: Float
+  order_gte: Float
+  order_lt: Float
+  order_lte: Float
+  order_in: [Int!]
+  categoryId_eq: ID
+  categoryId_in: [ID!]
+  isCategory_eq: K12ModuleIsCategory
+  isCategory_in: [K12ModuleIsCategory!]
+  status_eq: K12ModuleStatus
+  status_in: [K12ModuleStatus!]
+  superiorId_eq: ID
+  superiorId_in: [ID!]
+  applicationId_eq: ID
+  applicationId_in: [ID!]
+}
+
+input K12ModuleWhereUniqueInput {
+  id: String!
+}
+
+type K12Power implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """权限名称"""
+  name: String!
+
+  """权限编号"""
+  code: String!
+
+  """导航地址"""
+  path: String
+
+  """图标"""
+  icon: String
+
+  """备注"""
+  remark: String
+
+  """排序"""
+  order: Int
+
+  """权限状态，0正常、1禁用"""
+  status: K12PowerStatus
+
+  """上级权限"""
+  superior: K12Power
+
+  """上级权限"""
+  superiorId: String
+
+  """所属分类"""
+  category: K12PowerCategory
+
+  """所属分类"""
+  categoryId: String!
+  powerModuleMappings: K12PowerModuleMapping
+}
+
+type K12PowerCategory implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """分类名称"""
+  name: String!
+
+  """分类编号"""
+  code: String!
+
+  """备注"""
+  remark: String
+
+  """类型，0权限、1导航"""
+  type: K12PowerCategoryType
+
+  """状态，0正常、1禁用"""
+  status: K12PowerCategoryStatus
+
+  """所属应用"""
+  application: K12Application
+
+  """所属应用"""
+  applicationId: String
+  powers: [K12Power!]
+}
+
+input K12PowerCategoryCreateInput {
+  name: String!
+  code: String!
+  remark: String
+  type: K12PowerCategoryType!
+  status: K12PowerCategoryStatus!
+  applicationId: String
+}
+
+enum K12PowerCategoryStatus {
+  NORMAL
+  DISABLE
+}
+
+enum K12PowerCategoryType {
+  PERM
+  NAV
+}
+
+input K12PowerCategoryUpdateInput {
+  name: String
+  code: String
+  remark: String
+  type: K12PowerCategoryType
+  status: K12PowerCategoryStatus
+  applicationId: String
+}
+
+input K12PowerCategoryWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  code_eq: String
+  code_contains: String
+  code_startsWith: String
+  code_endsWith: String
+  code_in: [String!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  type_eq: K12PowerCategoryType
+  type_in: [K12PowerCategoryType!]
+  status_eq: K12PowerCategoryStatus
+  status_in: [K12PowerCategoryStatus!]
+  applicationId_eq: ID
+  applicationId_in: [ID!]
+}
+
+input K12PowerCategoryWhereUniqueInput {
+  id: String!
+}
+
+input K12PowerCreateInput {
+  name: String!
+  code: String!
+  path: String
+  icon: String
+  remark: String
+  order: Float!
+  status: K12PowerStatus!
+  superiorId: String
+  categoryId: String!
+}
+
+type K12PowerModuleMapping implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """模块ID"""
+  module: K12Module
+
+  """模块ID"""
+  moduleId: String!
+
+  """权限ID"""
+  power: K12Power
+
+  """权限ID"""
+  powerId: String!
+}
+
+input K12PowerModuleMappingCreateInput {
+  moduleId: String!
+  powerId: String!
+}
+
+input K12PowerModuleMappingUpdateInput {
+  moduleId: String
+  powerId: String
+}
+
+input K12PowerModuleMappingWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  moduleId_eq: ID
+  moduleId_in: [ID!]
+  powerId_eq: ID
+  powerId_in: [ID!]
+}
+
+input K12PowerModuleMappingWhereUniqueInput {
+  id: String!
+}
+
+enum K12PowerStatus {
+  NORMAL
+  DISABLE
+}
+
+input K12PowerUpdateInput {
+  name: String
+  code: String
+  path: String
+  icon: String
+  remark: String
+  order: Float
+  status: K12PowerStatus
+  superiorId: String
+  categoryId: String
+}
+
+input K12PowerWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  code_eq: String
+  code_contains: String
+  code_startsWith: String
+  code_endsWith: String
+  code_in: [String!]
+  path_eq: String
+  path_contains: String
+  path_startsWith: String
+  path_endsWith: String
+  path_in: [String!]
+  icon_eq: String
+  icon_contains: String
+  icon_startsWith: String
+  icon_endsWith: String
+  icon_in: [String!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  order_eq: Float
+  order_gt: Float
+  order_gte: Float
+  order_lt: Float
+  order_lte: Float
+  order_in: [Int!]
+  status_eq: K12PowerStatus
+  status_in: [K12PowerStatus!]
+  superiorId_eq: ID
+  superiorId_in: [ID!]
+  categoryId_eq: ID
+  categoryId_in: [ID!]
+}
+
+input K12PowerWhereUniqueInput {
+  id: String!
+}
+
+type K12RoleGroup implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """角色组名称"""
+  name: String!
+
+  """角色组编号"""
+  code: String!
+
+  """备注"""
+  remark: String
+
+  """学校ID"""
+  schoolId: Int!
+
+  """模块分类ID列表"""
+  moduleCategoryIds: String
+
+  """原始ID"""
+  original: K12RoleGroup
+
+  """原始ID"""
+  originalId: String
+  moduleGroup: [K12ModuleGroup!]
+}
+
+input K12RoleGroupCreateInput {
+  name: String!
+  code: String!
+  remark: String
+  schoolId: String!
+  moduleCategoryIds: String
+  originalId: String
+}
+
+input K12RoleGroupUpdateInput {
+  name: String
+  code: String
+  remark: String
+  schoolId: String
+  moduleCategoryIds: String
+  originalId: String
+}
+
+input K12RoleGroupWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  code_eq: String
+  code_contains: String
+  code_startsWith: String
+  code_endsWith: String
+  code_in: [String!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  schoolId_eq: ID
+  schoolId_in: [ID!]
+  moduleCategoryIds_eq: String
+  moduleCategoryIds_contains: String
+  moduleCategoryIds_startsWith: String
+  moduleCategoryIds_endsWith: String
+  moduleCategoryIds_in: [String!]
+  originalId_eq: ID
+  originalId_in: [ID!]
+}
+
+input K12RoleGroupWhereUniqueInput {
+  id: String!
+}
+
+type K12SchoolExtend implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """学校ID"""
+  schoolId: Int!
+
+  """学校权限相关数据是否初始化，0否、1是"""
+  regulateIsInit: K12SchoolRegulateIsInit
+}
+
+input K12SchoolExtendCreateInput {
+  schoolId: String!
+  regulateIsInit: K12SchoolRegulateIsInit!
+}
+
+input K12SchoolExtendUpdateInput {
+  schoolId: String
+  regulateIsInit: K12SchoolRegulateIsInit
+}
+
+input K12SchoolExtendWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  schoolId_eq: ID
+  schoolId_in: [ID!]
+  regulateIsInit_eq: K12SchoolRegulateIsInit
+  regulateIsInit_in: [K12SchoolRegulateIsInit!]
+}
+
+input K12SchoolExtendWhereUniqueInput {
+  id: String!
+}
+
+type K12SchoolModuleMapping implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """学校ID"""
+  schoolId: Int!
+
+  """模块ID"""
+  module: K12Module
+
+  """模块ID"""
+  moduleId: String!
+}
+
+input K12SchoolModuleMappingCreateInput {
+  schoolId: String!
+  moduleId: String!
+}
+
+input K12SchoolModuleMappingUpdateInput {
+  schoolId: String
+  moduleId: String
+}
+
+input K12SchoolModuleMappingWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  schoolId_eq: ID
+  schoolId_in: [ID!]
+  moduleId_eq: ID
+  moduleId_in: [ID!]
+}
+
+input K12SchoolModuleMappingWhereUniqueInput {
+  id: String!
+}
+
+enum K12SchoolRegulateIsInit {
+  NO
+  YES
+}
+
+type K12UserModuleGroupMapping implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """过期时间，null为永不过期"""
+  expireTime: DateTime
+
+  """用户ID"""
+  userId: Int!
+
+  """模块组ID"""
+  moduleGroup: K12ModuleGroup
+
+  """模块组ID"""
+  moduleGroupId: String!
+}
+
+input K12UserModuleGroupMappingCreateInput {
+  expireTime: DateTime
+  userId: String!
+  moduleGroupId: String!
+}
+
+input K12UserModuleGroupMappingUpdateInput {
+  expireTime: DateTime
+  userId: String
+  moduleGroupId: String
+}
+
+input K12UserModuleGroupMappingWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  expireTime_gt: DateTime
+  expireTime_gte: DateTime
+  expireTime_lt: DateTime
+  expireTime_lte: DateTime
+  userId_eq: ID
+  userId_in: [ID!]
+  moduleGroupId_eq: ID
+  moduleGroupId_in: [ID!]
+}
+
+input K12UserModuleGroupMappingWhereUniqueInput {
+  id: String!
+}
+
+type Menu implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """菜单名称"""
+  name: String!
+
+  """菜单编号"""
+  code: String!
+
+  """菜单地址"""
+  path: String!
+
+  """图标地址"""
+  icon: String!
+
+  """菜单顺序"""
+  order: Int
+
+  """是否是分类，用来把菜单分组用，用户菜单请不要绑定分类"""
+  isCategory: MenuIsCategory
+
+  """备注"""
+  remark: String
+
+  """上级菜单分类"""
+  supreior: Menu
+
+  """上级菜单分类"""
+  supreiorId: String
+
+  """所属平台"""
+  platform: Platform
+
+  """所属平台"""
+  platformId: String
+  menuUsers: [MenuUser!]
+  menuRoles: [MenuRole!]
+}
+
+input MenuCreateInput {
+  name: String!
+  code: String!
+  path: String!
+  icon: String!
+  order: Float
+  isCategory: MenuIsCategory!
+  remark: String
+  supreiorId: String
+  platformId: String
+}
+
+enum MenuIsCategory {
+  YES
+  NO
+}
+
+"""菜单列表视图"""
+type MenuList {
+  """列表信息"""
+  rows: [Menu!]!
+
+  """记录总数，用来做分页"""
+  count: Int!
+}
+
+enum MenuOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  name_ASC
+  name_DESC
+  code_ASC
+  code_DESC
+  path_ASC
+  path_DESC
+  icon_ASC
+  icon_DESC
+  order_ASC
+  order_DESC
+  isCategory_ASC
+  isCategory_DESC
+  remark_ASC
+  remark_DESC
+  supreiorId_ASC
+  supreiorId_DESC
+  platformId_ASC
+  platformId_DESC
+}
+
+type MenuRole implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """角色ID"""
+  role: Role
+
+  """角色ID"""
+  roleId: String!
+
+  """菜单ID"""
+  menu: Menu
+
+  """菜单ID"""
+  menuId: String!
+}
+
+input MenuRoleCreateInput {
+  roleId: String!
+  menuId: String!
+}
+
+input MenuRoleUpdateInput {
+  roleId: String
+  menuId: String
+}
+
+input MenuRoleWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  roleId_eq: ID
+  roleId_in: [ID!]
+  menuId_eq: ID
+  menuId_in: [ID!]
+}
+
+input MenuRoleWhereUniqueInput {
+  id: String!
+}
+
+input MenuUpdateInput {
+  name: String
+  code: String
+  path: String
+  icon: String
+  order: Float
+  isCategory: MenuIsCategory
+  remark: String
+  supreiorId: String
+  platformId: String
+}
+
+type MenuUser implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """用户ID"""
+  user: User
+
+  """用户ID"""
+  userId: String!
+
+  """菜单ID"""
+  menu: Menu
+
+  """菜单ID"""
+  menuId: String!
+}
+
+input MenuUserCreateInput {
+  userId: String!
+  menuId: String!
+}
+
+input MenuUserUpdateInput {
+  userId: String
+  menuId: String
+}
+
+input MenuUserWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  userId_eq: ID
+  userId_in: [ID!]
+  menuId_eq: ID
+  menuId_in: [ID!]
+}
+
+input MenuUserWhereUniqueInput {
+  id: String!
+}
+
+input MenuWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  code_eq: String
+  code_contains: String
+  code_startsWith: String
+  code_endsWith: String
+  code_in: [String!]
+  path_eq: String
+  path_contains: String
+  path_startsWith: String
+  path_endsWith: String
+  path_in: [String!]
+  icon_eq: String
+  icon_contains: String
+  icon_startsWith: String
+  icon_endsWith: String
+  icon_in: [String!]
+  order_eq: Float
+  order_gt: Float
+  order_gte: Float
+  order_lt: Float
+  order_lte: Float
+  order_in: [Int!]
+  isCategory_eq: MenuIsCategory
+  isCategory_in: [MenuIsCategory!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  supreiorId_eq: ID
+  supreiorId_in: [ID!]
+  platformId_eq: ID
+  platformId_in: [ID!]
+}
+
+input MenuWhereUniqueInput {
+  id: String!
+}
+
+type Mutation {
+  createDepartment(data: DepartmentCreateInput!): Department!
+  createMenu(data: MenuCreateInput!): Menu!
+  addRoleMenu(data: BindRoleMenuInput!): [MenuRole!]!
+  addUserMenu(data: BindUserMenuInput!): [MenuUser!]!
+  createOrganization(data: OrganizationCreateInput!): Organization!
+  createPermission(data: PermissionCreateInput!): Permission!
+  addRolePermission(data: BindRolePermissionInput!): [PermissionRole!]!
+  addUserPermission(data: BindUserPermissionInput!): [PermissionUser!]!
+  createPlatform(data: PlatformCreateInput!): Platform!
+  createRole(data: RoleCreateInput!): Role!
+  addUserRole(data: BindUserRoleInput!): [RoleUser!]!
+  createUser(data: UserCreateInput!): User!
+}
+
+type Organization implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """机构名称"""
+  organizeName: String!
+
+  """所在地区"""
+  location: String
+}
+
+input OrganizationCreateInput {
+  organizeName: String!
+  location: String
+}
+
+"""机构列表视图"""
+type OrganizationList {
+  """列表信息"""
+  rows: [Organization!]!
+
+  """记录总数，用来做分页"""
+  count: Int!
+}
+
+enum OrganizationOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  organizeName_ASC
+  organizeName_DESC
+  location_ASC
+  location_DESC
+}
+
+input OrganizationUpdateInput {
+  organizeName: String
+  location: String
+}
+
+input OrganizationWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  organizeName_eq: String
+  organizeName_contains: String
+  organizeName_startsWith: String
+  organizeName_endsWith: String
+  organizeName_in: [String!]
+  location_eq: String
+  location_contains: String
+  location_startsWith: String
+  location_endsWith: String
+  location_in: [String!]
+}
+
+input OrganizationWhereUniqueInput {
+  id: String!
+}
+
+type Permission implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """权限名称"""
+  name: String!
+
+  """权限编号"""
+  code: String!
+
+  """是否是分类，用来跟权限分组用，用户权限请不要绑定分类"""
+  isCategory: PermissionIsCategory
+
+  """是否所有平台通用"""
+  isGlobal: PermissionIsGlobal
+
+  """备注"""
+  remark: String
+
+  """上级权限分类"""
+  supreior: Permission
+
+  """上级权限分类"""
+  supreiorId: String
+
+  """所属平台"""
+  platform: Platform
+
+  """所属平台"""
+  platformId: String
+  permissionUsers: [PermissionUser!]
+  permissionRoles: [PermissionRole!]
+}
+
+input PermissionCreateInput {
+  name: String!
+  code: String!
+  isCategory: PermissionIsCategory!
+  isGlobal: PermissionIsGlobal!
+  remark: String
+  supreiorId: String
+  platformId: String
+}
+
+enum PermissionIsCategory {
+  YES
+  NO
+}
+
+enum PermissionIsGlobal {
+  YES
+  NO
+}
+
+"""权限列表视图"""
+type PermissionList {
+  """列表信息"""
+  rows: [Permission!]!
+
+  """记录总数，用来做分页"""
+  count: Int!
+}
+
+enum PermissionOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  name_ASC
+  name_DESC
+  code_ASC
+  code_DESC
+  isCategory_ASC
+  isCategory_DESC
+  isGlobal_ASC
+  isGlobal_DESC
+  remark_ASC
+  remark_DESC
+  supreiorId_ASC
+  supreiorId_DESC
+  platformId_ASC
+  platformId_DESC
+}
+
+type PermissionRole implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """角色ID"""
+  role: Role
+
+  """角色ID"""
+  roleId: String!
+
+  """权限ID"""
+  permission: Permission
+
+  """权限ID"""
+  permissionId: String!
+}
+
+input PermissionRoleCreateInput {
+  roleId: String!
+  permissionId: String!
+}
+
+input PermissionRoleUpdateInput {
+  roleId: String
+  permissionId: String
+}
+
+input PermissionRoleWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  roleId_eq: ID
+  roleId_in: [ID!]
+  permissionId_eq: ID
+  permissionId_in: [ID!]
+}
+
+input PermissionRoleWhereUniqueInput {
+  id: String!
+}
+
+input PermissionUpdateInput {
+  name: String
+  code: String
+  isCategory: PermissionIsCategory
+  isGlobal: PermissionIsGlobal
+  remark: String
+  supreiorId: String
+  platformId: String
+}
+
+type PermissionUser implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """用户ID"""
+  user: User
+
+  """用户ID"""
+  userId: String!
+
+  """权限ID"""
+  permission: Permission
+
+  """权限ID"""
+  permissionId: String!
+}
+
+input PermissionUserCreateInput {
+  userId: String!
+  permissionId: String!
+}
+
+input PermissionUserUpdateInput {
+  userId: String
+  permissionId: String
+}
+
+input PermissionUserWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  userId_eq: ID
+  userId_in: [ID!]
+  permissionId_eq: ID
+  permissionId_in: [ID!]
+}
+
+input PermissionUserWhereUniqueInput {
+  id: String!
+}
+
+input PermissionWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  code_eq: String
+  code_contains: String
+  code_startsWith: String
+  code_endsWith: String
+  code_in: [String!]
+  isCategory_eq: PermissionIsCategory
+  isCategory_in: [PermissionIsCategory!]
+  isGlobal_eq: PermissionIsGlobal
+  isGlobal_in: [PermissionIsGlobal!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  supreiorId_eq: ID
+  supreiorId_in: [ID!]
+  platformId_eq: ID
+  platformId_in: [ID!]
+}
+
+input PermissionWhereUniqueInput {
+  id: String!
+}
+
+type Platform implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """平台名称"""
+  platformName: String!
+
+  """平台介绍"""
+  platformDesc: String!
+}
+
+input PlatformCreateInput {
+  platformName: String!
+  platformDesc: String!
+}
+
+"""平台列表视图"""
+type PlatformList {
+  """列表信息"""
+  rows: [Platform!]!
+
+  """记录总数，用来做分页"""
+  count: Int!
+}
+
+enum PlatformOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  platformName_ASC
+  platformName_DESC
+  platformDesc_ASC
+  platformDesc_DESC
+}
+
+input PlatformUpdateInput {
+  platformName: String
+  platformDesc: String
+}
+
+input PlatformWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  platformName_eq: String
+  platformName_contains: String
+  platformName_startsWith: String
+  platformName_endsWith: String
+  platformName_in: [String!]
+  platformDesc_eq: String
+  platformDesc_contains: String
+  platformDesc_startsWith: String
+  platformDesc_endsWith: String
+  platformDesc_in: [String!]
+}
+
+input PlatformWhereUniqueInput {
+  id: String!
+}
+
+type Query {
+  departments(offset: Int, limit: Int = 50, where: DepartmentWhereInput, orderBy: DepartmentOrderByInput): DepartmentList!
+  menus(offset: Int, limit: Int = 50, where: MenuWhereInput, orderBy: MenuOrderByInput): MenuList!
+  organizations(offset: Int, limit: Int = 50, where: OrganizationWhereInput, orderBy: OrganizationOrderByInput): OrganizationList!
+  permissions(offset: Int, limit: Int = 50, where: PermissionWhereInput, orderBy: PermissionOrderByInput): PermissionList!
+  platforms(offset: Int, limit: Int = 50, where: PlatformWhereInput, orderBy: PlatformOrderByInput): PlatformList!
+  roles(offset: Int, limit: Int = 50, where: RoleWhereInput, orderBy: RoleOrderByInput): RoleList!
+  users(offset: Int, limit: Int = 50, where: UserWhereInput, orderBy: UserOrderByInput): UserList!
+}
+
+type Role implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """角色名称"""
+  roleName: String!
+
+  """角色编号"""
+  roleCode: String!
+
+  """备注"""
+  remark: String
+
+  """所属平台"""
+  platform: Platform
+
+  """所属平台"""
+  platformId: String
+  permissionRoles: [PermissionRole!]
+  roleUsers: [RoleUser!]
+}
+
+input RoleCreateInput {
+  roleName: String!
+  roleCode: String!
+  remark: String
+  platformId: String
+}
+
+"""角色列表视图"""
+type RoleList {
+  """列表信息"""
+  rows: [Role!]!
+
+  """记录总数，用来做分页"""
+  count: Int!
+}
+
+enum RoleOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  roleName_ASC
+  roleName_DESC
+  roleCode_ASC
+  roleCode_DESC
+  remark_ASC
+  remark_DESC
+  platformId_ASC
+  platformId_DESC
+}
+
+input RoleUpdateInput {
+  roleName: String
+  roleCode: String
+  remark: String
+  platformId: String
+}
+
+type RoleUser implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """用户ID"""
+  user: User
+
+  """用户ID"""
+  userId: String!
+
+  """角色ID"""
+  role: Role
+
+  """角色ID"""
+  roleId: String!
+}
+
+input RoleUserCreateInput {
+  userId: String!
+  roleId: String!
+}
+
+input RoleUserUpdateInput {
+  userId: String
+  roleId: String
+}
+
+input RoleUserWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  userId_eq: ID
+  userId_in: [ID!]
+  roleId_eq: ID
+  roleId_in: [ID!]
+}
+
+input RoleUserWhereUniqueInput {
+  id: String!
+}
+
+input RoleWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  roleName_eq: String
+  roleName_contains: String
+  roleName_startsWith: String
+  roleName_endsWith: String
+  roleName_in: [String!]
+  roleCode_eq: String
+  roleCode_contains: String
+  roleCode_startsWith: String
+  roleCode_endsWith: String
+  roleCode_in: [String!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  platformId_eq: ID
+  platformId_in: [ID!]
+}
+
+input RoleWhereUniqueInput {
+  id: String!
+}
+
+type ThirdPartyAuth implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """第三方应用名称"""
+  name: String!
+
+  """第三方应用ID"""
+  appId: String!
+
+  """第三方应用密钥"""
+  appSecret: String!
+
+  """备注"""
+  remark: String
+
+  """绑定的学校ID列表"""
+  schools: String
+
+  """accessToken有效时间，单位（秒）"""
+  tokenExpireTime: Int
+
+  """第三方应用状态，0正常、1禁用"""
+  status: ThirdPartyAuthStatus
+}
+
+input ThirdPartyAuthCreateInput {
+  name: String!
+  appId: String!
+  appSecret: String!
+  remark: String
+  schools: String
+  tokenExpireTime: Float
+  status: ThirdPartyAuthStatus!
+}
+
+enum ThirdPartyAuthStatus {
+  NORMAL
+  DISABLE
+}
+
+input ThirdPartyAuthUpdateInput {
+  name: String
+  appId: String
+  appSecret: String
+  remark: String
+  schools: String
+  tokenExpireTime: Float
+  status: ThirdPartyAuthStatus
+}
+
+input ThirdPartyAuthWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  name_eq: String
+  name_contains: String
+  name_startsWith: String
+  name_endsWith: String
+  name_in: [String!]
+  appId_eq: ID
+  appId_in: [ID!]
+  appSecret_eq: String
+  appSecret_contains: String
+  appSecret_startsWith: String
+  appSecret_endsWith: String
+  appSecret_in: [String!]
+  remark_eq: String
+  remark_contains: String
+  remark_startsWith: String
+  remark_endsWith: String
+  remark_in: [String!]
+  schools_eq: String
+  schools_contains: String
+  schools_startsWith: String
+  schools_endsWith: String
+  schools_in: [String!]
+  tokenExpireTime_eq: Float
+  tokenExpireTime_gt: Float
+  tokenExpireTime_gte: Float
+  tokenExpireTime_lt: Float
+  tokenExpireTime_lte: Float
+  tokenExpireTime_in: [Int!]
+  status_eq: ThirdPartyAuthStatus
+  status_in: [ThirdPartyAuthStatus!]
+}
+
+input ThirdPartyAuthWhereUniqueInput {
+  id: String!
+}
+
+type User implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """用户名"""
+  username: String!
+
+  """真实姓名"""
+  realname: String
+
+  """用户昵称"""
+  nickname: String
+
+  """性别"""
+  gender: UserGender
+
+  """是否是超级管理员"""
+  isSuperuser: UserIsSuperuser
+
+  """是否是员工"""
+  isStaff: UserIsStaff
+
+  """是否启用"""
+  isActive: UserIsActive
+
+  """电子邮箱"""
+  email: String!
+
+  """手机号码"""
+  mobile: String
+
+  """首次登陆时间"""
+  firstLoginTime: DateTime
+
+  """最后一次登陆时间"""
+  lastLoginTime: DateTime
+
+  """所属部门"""
+  department: Department
+
+  """所属部门"""
+  departmentId: String
+
+  """所属机构"""
+  organization: Organization
+
+  """所属机构"""
+  organizationId: String
+
+  """所属平台"""
+  platform: Platform
+
+  """所属平台"""
+  platformId: String
+  permissionUsers: [PermissionUser!]
+  roleUsers: [RoleUser!]
+}
+
+input UserCreateInput {
+  username: String!
+  password: String!
+  realname: String
+  nickname: String
+  gender: UserGender!
+  isSuperuser: UserIsSuperuser!
+  isStaff: UserIsStaff!
+  isActive: UserIsActive!
+  email: String
+  mobile: String
+  firstLoginTime: DateTime
+  lastLoginTime: DateTime
+  departmentId: String
+  organizationId: String
+  platformId: String
+}
+
+enum UserGender {
+  UNKNOWN
+  MAN
+  WOMAN
+}
+
+enum UserIsActive {
+  NO
+  YES
+}
+
+enum UserIsStaff {
+  NO
+  YES
+}
+
+enum UserIsSuperuser {
+  NO
+  YES
+}
+
+"""用户列表列表视图"""
+type UserList {
+  """列表信息"""
+  rows: [User!]!
+
+  """记录总数，用来做分页"""
+  count: Int!
+}
+
+enum UserOrderByInput {
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  deletedAt_ASC
+  deletedAt_DESC
+  username_ASC
+  username_DESC
+  password_ASC
+  password_DESC
+  realname_ASC
+  realname_DESC
+  nickname_ASC
+  nickname_DESC
+  gender_ASC
+  gender_DESC
+  isSuperuser_ASC
+  isSuperuser_DESC
+  isStaff_ASC
+  isStaff_DESC
+  isActive_ASC
+  isActive_DESC
+  email_ASC
+  email_DESC
+  mobile_ASC
+  mobile_DESC
+  firstLoginTime_ASC
+  firstLoginTime_DESC
+  lastLoginTime_ASC
+  lastLoginTime_DESC
+  departmentId_ASC
+  departmentId_DESC
+  organizationId_ASC
+  organizationId_DESC
+  platformId_ASC
+  platformId_DESC
+}
+
+input UserUpdateInput {
+  username: String
+  password: String
+  realname: String
+  nickname: String
+  gender: UserGender
+  isSuperuser: UserIsSuperuser
+  isStaff: UserIsStaff
+  isActive: UserIsActive
+  email: String
+  mobile: String
+  firstLoginTime: DateTime
+  lastLoginTime: DateTime
+  departmentId: String
+  organizationId: String
+  platformId: String
+}
+
+input UserWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  username_eq: String
+  username_contains: String
+  username_startsWith: String
+  username_endsWith: String
+  username_in: [String!]
+  password_eq: String
+  password_contains: String
+  password_startsWith: String
+  password_endsWith: String
+  password_in: [String!]
+  realname_eq: String
+  realname_contains: String
+  realname_startsWith: String
+  realname_endsWith: String
+  realname_in: [String!]
+  nickname_eq: String
+  nickname_contains: String
+  nickname_startsWith: String
+  nickname_endsWith: String
+  nickname_in: [String!]
+  gender_eq: UserGender
+  gender_in: [UserGender!]
+  isSuperuser_eq: UserIsSuperuser
+  isSuperuser_in: [UserIsSuperuser!]
+  isStaff_eq: UserIsStaff
+  isStaff_in: [UserIsStaff!]
+  isActive_eq: UserIsActive
+  isActive_in: [UserIsActive!]
+  email_eq: String
+  email_contains: String
+  email_startsWith: String
+  email_endsWith: String
+  email_in: [String!]
+  mobile_eq: String
+  mobile_contains: String
+  mobile_startsWith: String
+  mobile_endsWith: String
+  mobile_in: [String!]
+  firstLoginTime_gt: DateTime
+  firstLoginTime_gte: DateTime
+  firstLoginTime_lt: DateTime
+  firstLoginTime_lte: DateTime
+  lastLoginTime_gt: DateTime
+  lastLoginTime_gte: DateTime
+  lastLoginTime_lt: DateTime
+  lastLoginTime_lte: DateTime
+  departmentId_eq: ID
+  departmentId_in: [ID!]
+  organizationId_eq: ID
+  organizationId_in: [ID!]
+  platformId_eq: ID
+  platformId_in: [ID!]
+}
+
+input UserWhereUniqueInput {
+  id: String!
+}
+
+type WxAccount implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """账户配置"""
+  config: WxAccountConfig
+
+  """账户配置"""
+  configId: String!
+
+  """账户名称"""
+  accountName: String!
+
+  """微信AppId"""
+  appId: String!
+
+  """微信AppSecret"""
+  appSecret: String!
+
+  """微信号"""
+  wechatId: String
+
+  """下发的身份标识"""
+  identityId: String!
+
+  """所属机构"""
+  organization: Organization
+
+  """所属机构"""
+  organizationId: String
+}
+
+type WxAccountConfig implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """微信号"""
+  wechatId: String!
+
+  """微信支付子商户号"""
+  subMchId: String
+
+  """关注回复"""
+  followReply: String
+
+  """消息回调地址"""
+  messageCallbackUrl: String
+}
+
+input WxAccountConfigCreateInput {
+  wechatId: String!
+  subMchId: String
+  followReply: String
+  messageCallbackUrl: String
+}
+
+input WxAccountConfigUpdateInput {
+  wechatId: String
+  subMchId: String
+  followReply: String
+  messageCallbackUrl: String
+}
+
+input WxAccountConfigWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  wechatId_eq: ID
+  wechatId_in: [ID!]
+  subMchId_eq: ID
+  subMchId_in: [ID!]
+  followReply_eq: String
+  followReply_contains: String
+  followReply_startsWith: String
+  followReply_endsWith: String
+  followReply_in: [String!]
+  messageCallbackUrl_eq: String
+  messageCallbackUrl_contains: String
+  messageCallbackUrl_startsWith: String
+  messageCallbackUrl_endsWith: String
+  messageCallbackUrl_in: [String!]
+}
+
+input WxAccountConfigWhereUniqueInput {
+  id: String!
+}
+
+input WxAccountCreateInput {
+  configId: String!
+  accountName: String!
+  appId: String!
+  appSecret: String!
+  wechatId: String
+  identityId: String!
+  organizationId: String
+}
+
+input WxAccountUpdateInput {
+  configId: String
+  accountName: String
+  appId: String
+  appSecret: String
+  wechatId: String
+  identityId: String
+  organizationId: String
+}
+
+input WxAccountWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  configId_eq: ID
+  configId_in: [ID!]
+  accountName_eq: String
+  accountName_contains: String
+  accountName_startsWith: String
+  accountName_endsWith: String
+  accountName_in: [String!]
+  appId_eq: ID
+  appId_in: [ID!]
+  appSecret_eq: String
+  appSecret_contains: String
+  appSecret_startsWith: String
+  appSecret_endsWith: String
+  appSecret_in: [String!]
+  wechatId_eq: ID
+  wechatId_in: [ID!]
+  identityId_eq: ID
+  identityId_in: [ID!]
+  organizationId_eq: ID
+  organizationId_in: [ID!]
+}
+
+input WxAccountWhereUniqueInput {
+  id: String
+  configId: ID
+}
+
+type WxMessageTask implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """批处理数量"""
+  batchCount: Int!
+
+  """执行的相关参数，json字符串"""
+  params: String!
+
+  """执行者"""
+  executor: WxAccount
+
+  """执行者"""
+  executorId: String!
+
+  """任务类型，1模板消息，0其他"""
+  type: WxMsgTaskType
+
+  """是否延迟执行，1是，0否"""
+  isDelay: WxMsgIsDelay
+
+  """计划执行时间"""
+  planTime: DateTime
+
+  """任务进度，0开始执行；1执行完成"""
+  progress: WxMsgTaskProgress
+}
+
+input WxMessageTaskCreateInput {
+  batchCount: Float!
+  params: String!
+  executorId: String!
+  type: WxMsgTaskType!
+  isDelay: WxMsgIsDelay!
+  planTime: DateTime
+  progress: WxMsgTaskProgress!
+}
+
+input WxMessageTaskUpdateInput {
+  batchCount: Float
+  params: String
+  executorId: String
+  type: WxMsgTaskType
+  isDelay: WxMsgIsDelay
+  planTime: DateTime
+  progress: WxMsgTaskProgress
+}
+
+input WxMessageTaskWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  batchCount_eq: Float
+  batchCount_gt: Float
+  batchCount_gte: Float
+  batchCount_lt: Float
+  batchCount_lte: Float
+  batchCount_in: [Int!]
+  params_eq: String
+  params_contains: String
+  params_startsWith: String
+  params_endsWith: String
+  params_in: [String!]
+  executorId_eq: ID
+  executorId_in: [ID!]
+  type_eq: WxMsgTaskType
+  type_in: [WxMsgTaskType!]
+  isDelay_eq: WxMsgIsDelay
+  isDelay_in: [WxMsgIsDelay!]
+  planTime_gt: DateTime
+  planTime_gte: DateTime
+  planTime_lt: DateTime
+  planTime_lte: DateTime
+  progress_eq: WxMsgTaskProgress
+  progress_in: [WxMsgTaskProgress!]
+}
+
+input WxMessageTaskWhereUniqueInput {
+  id: String!
+}
+
+enum WxMsgIsDelay {
+  YES
+  NO
+}
+
+enum WxMsgTaskProgress {
+  READY
+  COMPLETE
+}
+
+enum WxMsgTaskType {
+  DEFAULT
+  TEMPLATE
+}
+
+type WxTemplateLibrary implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """模板库中模板的编号，有“TM**”和“OPENTMTM**”等形式"""
+  templateShortId: String!
+
+  """模板消息名称"""
+  templateName: String!
+}
+
+input WxTemplateLibraryCreateInput {
+  templateShortId: String!
+  templateName: String!
+}
+
+input WxTemplateLibraryUpdateInput {
+  templateShortId: String
+  templateName: String
+}
+
+input WxTemplateLibraryWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  templateShortId_eq: ID
+  templateShortId_in: [ID!]
+  templateName_eq: String
+  templateName_contains: String
+  templateName_startsWith: String
+  templateName_endsWith: String
+  templateName_in: [String!]
+}
+
+input WxTemplateLibraryWhereUniqueInput {
+  id: String!
+}
+
+type WxTemplateMessage implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """微信模板消息ID"""
+  msgId: String
+
+  """临时生成的msgId"""
+  tempMsgId: String
+
+  """微信用户openid"""
+  openid: String
+
+  """微信用户unionid"""
+  unionid: String
+
+  """微信模板消息ID"""
+  templateId: String!
+
+  """消息跳转web地址"""
+  url: String
+
+  """模板内容字体颜色"""
+  color: String
+
+  """跳转的微信小程序appId"""
+  miniprogramAppId: String
+
+  """跳转的微信小程序地址"""
+  miniprogramPagepath: String
+
+  """小程序模板消息内容，json字符串"""
+  data: String!
+
+  """执行者"""
+  executor: WxAccount
+
+  """执行者"""
+  executorId: String!
+
+  """所属任务，用来统计属于哪次操作"""
+  messageTask: WxMessageTask
+
+  """所属任务，用来统计属于哪次操作"""
+  messageTaskId: String!
+
+  """消息状态，1推送成功，2推送失败，3接收成功，4接收失败，0其他"""
+  status: WxTmPushStatus
+
+  """推送失败原因"""
+  failReason: String
+}
+
+input WxTemplateMessageCreateInput {
+  msgId: String
+  tempMsgId: String
+  openid: String
+  unionid: String
+  templateId: String!
+  url: String
+  color: String
+  miniprogramAppId: String
+  miniprogramPagepath: String
+  data: String!
+  executorId: String!
+  messageTaskId: String!
+  status: WxTmPushStatus!
+  failReason: String
+}
+
+input WxTemplateMessageUpdateInput {
+  msgId: String
+  tempMsgId: String
+  openid: String
+  unionid: String
+  templateId: String
+  url: String
+  color: String
+  miniprogramAppId: String
+  miniprogramPagepath: String
+  data: String
+  executorId: String
+  messageTaskId: String
+  status: WxTmPushStatus
+  failReason: String
+}
+
+input WxTemplateMessageWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  msgId_eq: ID
+  msgId_in: [ID!]
+  tempMsgId_eq: ID
+  tempMsgId_in: [ID!]
+  openid_eq: String
+  openid_contains: String
+  openid_startsWith: String
+  openid_endsWith: String
+  openid_in: [String!]
+  unionid_eq: String
+  unionid_contains: String
+  unionid_startsWith: String
+  unionid_endsWith: String
+  unionid_in: [String!]
+  templateId_eq: ID
+  templateId_in: [ID!]
+  url_eq: String
+  url_contains: String
+  url_startsWith: String
+  url_endsWith: String
+  url_in: [String!]
+  color_eq: String
+  color_contains: String
+  color_startsWith: String
+  color_endsWith: String
+  color_in: [String!]
+  miniprogramAppId_eq: ID
+  miniprogramAppId_in: [ID!]
+  miniprogramPagepath_eq: String
+  miniprogramPagepath_contains: String
+  miniprogramPagepath_startsWith: String
+  miniprogramPagepath_endsWith: String
+  miniprogramPagepath_in: [String!]
+  data_eq: String
+  data_contains: String
+  data_startsWith: String
+  data_endsWith: String
+  data_in: [String!]
+  executorId_eq: ID
+  executorId_in: [ID!]
+  messageTaskId_eq: ID
+  messageTaskId_in: [ID!]
+  status_eq: WxTmPushStatus
+  status_in: [WxTmPushStatus!]
+  failReason_eq: String
+  failReason_contains: String
+  failReason_startsWith: String
+  failReason_endsWith: String
+  failReason_in: [String!]
+}
+
+input WxTemplateMessageWhereUniqueInput {
+  id: String!
+}
+
+type WxTemplateSetting implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """绑定公众号的模板消息ID"""
+  templateId: String!
+
+  """模板库中模板的编号，有“TM**”和“OPENTMTM**”等形式"""
+  templateShortId: String!
+
+  """微信AppId"""
+  appId: String!
+
+  """模板消息名称"""
+  templateName: String!
+}
+
+input WxTemplateSettingCreateInput {
+  templateId: String!
+  templateShortId: String!
+  appId: String!
+  templateName: String!
+}
+
+input WxTemplateSettingUpdateInput {
+  templateId: String
+  templateShortId: String
+  appId: String
+  templateName: String
+}
+
+input WxTemplateSettingWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  templateId_eq: ID
+  templateId_in: [ID!]
+  templateShortId_eq: ID
+  templateShortId_in: [ID!]
+  appId_eq: ID
+  appId_in: [ID!]
+  templateName_eq: String
+  templateName_contains: String
+  templateName_startsWith: String
+  templateName_endsWith: String
+  templateName_in: [String!]
+}
+
+input WxTemplateSettingWhereUniqueInput {
+  id: String!
+}
+
+enum WxTmPushStatus {
+  DEFAULT
+  PUSH_SUCCESS
+  PUSH_FAILED
+  RECEIVE_SUCCESS
+  RECEIVE_FAILED
+}
+
+type WxWechatUser implements BaseGraphQLObject {
+  id: ID!
+  createdAt: DateTime!
+  createdById: String!
+  updatedAt: DateTime
+  updatedById: String
+  deletedAt: DateTime
+  deletedById: String
+  version: Int!
+
+  """微信openid"""
+  openid: String!
+
+  """微信unionid"""
+  unionid: String!
+
+  """微信用户昵称"""
+  nickname: String
+
+  """性别，0未知，1男，2女"""
+  sex: WxWechatUserSex
+
+  """微信用户头像"""
+  headimgurl: String
+
+  """是否关注，0未关注，1已关注"""
+  subscribe: WxWechatUserSubscribe
+
+  """最后一次关注时间"""
+  subscribeTime: DateTime
+
+  """微信公众号账号"""
+  wechatId: String
+}
+
+input WxWechatUserCreateInput {
+  openid: String!
+  unionid: String!
+  nickname: String
+  sex: WxWechatUserSex!
+  headimgurl: String
+  subscribe: WxWechatUserSubscribe!
+  subscribeTime: DateTime
+  wechatId: String
+}
+
+enum WxWechatUserSex {
+  UNKNOWN
+  MAN
+  WOMAN
+}
+
+enum WxWechatUserSubscribe {
+  NO
+  YES
+}
+
+input WxWechatUserUpdateInput {
+  openid: String
+  unionid: String
+  nickname: String
+  sex: WxWechatUserSex
+  headimgurl: String
+  subscribe: WxWechatUserSubscribe
+  subscribeTime: DateTime
+  wechatId: String
+}
+
+input WxWechatUserWhereInput {
+  id_eq: String
+  id_in: [String!]
+  createdAt_eq: String
+  createdAt_lt: String
+  createdAt_lte: String
+  createdAt_gt: String
+  createdAt_gte: String
+  createdById_eq: String
+  updatedAt_eq: String
+  updatedAt_lt: String
+  updatedAt_lte: String
+  updatedAt_gt: String
+  updatedAt_gte: String
+  updatedById_eq: String
+  deletedAt_all: Boolean
+  deletedAt_eq: String
+  deletedAt_lt: String
+  deletedAt_lte: String
+  deletedAt_gt: String
+  deletedAt_gte: String
+  deletedById_eq: String
+  openid_eq: String
+  openid_contains: String
+  openid_startsWith: String
+  openid_endsWith: String
+  openid_in: [String!]
+  unionid_eq: String
+  unionid_contains: String
+  unionid_startsWith: String
+  unionid_endsWith: String
+  unionid_in: [String!]
+  nickname_eq: String
+  nickname_contains: String
+  nickname_startsWith: String
+  nickname_endsWith: String
+  nickname_in: [String!]
+  sex_eq: WxWechatUserSex
+  sex_in: [WxWechatUserSex!]
+  headimgurl_eq: String
+  headimgurl_contains: String
+  headimgurl_startsWith: String
+  headimgurl_endsWith: String
+  headimgurl_in: [String!]
+  subscribe_eq: WxWechatUserSubscribe
+  subscribe_in: [WxWechatUserSubscribe!]
+  subscribeTime_gt: DateTime
+  subscribeTime_gte: DateTime
+  subscribeTime_lt: DateTime
+  subscribeTime_lte: DateTime
+  wechatId_eq: ID
+  wechatId_in: [ID!]
+}
+
+input WxWechatUserWhereUniqueInput {
+  id: String!
+}

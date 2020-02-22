@@ -1,0 +1,110 @@
+{
+  "name": "account-platform",
+  "version": "1.0.0",
+  "description": "用户权限管理系统",
+  "private": true,
+  "egg": {
+    "typescript": true,
+    "declarations": true
+  },
+  "scripts": {
+    "start": "egg-scripts start --workers=8 --daemon --port=7021 --title=account-platform",
+    "stop": "egg-scripts stop --title=account-platform",
+    "dev": "npm run format && egg-bin dev --ts --port=7021",
+    "debug": "egg-bin debug",
+    "test-local": "egg-bin test --ts",
+    "test": "npm run lint --fix && npm run test-local",
+    "cov": "egg-bin cov",
+    "ets": "npx ets",
+    "tsc": "ets && tsc -p tsconfig.build.json",
+    "ci": "npm run format && npm run lint && npm run cov && npm run tsc",
+    "autod": "autod",
+    "lint": "tslint --project . -c tslint.json",
+    "format": "prettier --config .prettierrc --parser typescript --write \"{app,config,lib,plugin,test}/**/*.ts\"",
+    "clean": "ets clean",
+    "account_db:generate": "npm run tsc && ts-node -r tsconfig-paths/register node_modules/.bin/typeorm migration:generate -n account-db -c accountDB  --config app/typeorm/account/ormconfig.ts --dir ./app/typeorm/account/migration",
+    "account_db:migrate": "ts-node -r tsconfig-paths/register node_modules/.bin/typeorm migration:run -c accountDB --config app/typeorm/account/ormconfig.ts",
+    "k12_db:generate": "npm run tsc && ts-node -r tsconfig-paths/register node_modules/.bin/typeorm migration:generate -n k12-db -c k12DB  --config app/typeorm/k12/ormconfig.ts --dir ./app/typeorm/k12/migration",
+    "k12_db:migrate": "ts-node -r tsconfig-paths/register node_modules/.bin/typeorm migration:run -c k12DB --config app/typeorm/k12/ormconfig.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run tsc"
+    }
+  },
+  "dependencies": {
+    "amqplib": "^0.5.5",
+    "bcrypt": "^3.0.6",
+    "co-wechat-api": "^3.10.0",
+    "cross-fetch": "^3.0.4",
+    "crypto-js": "^3.1.9-1",
+    "dataloader": "^1.4.0",
+    "egg": "^2.6.1",
+    "egg-cors": "^2.2.0",
+    "egg-eureka-plus": "^1.0.7",
+    "egg-rabbitmq-plus": "^1.0.17",
+    "egg-redis": "^2.3.2",
+    "egg-scripts": "^2.6.0",
+    "egg-shell-plus": "^1.3.3",
+    "egg-static": "^2.2.0",
+    "egg-typeorm-graphql": "^1.0.3",
+    "egg-view-nunjucks": "^2.2.0",
+    "fs-extra": "^8.1.0",
+    "ip": "^1.1.5",
+    "is-type-of": "^1.2.1",
+    "js-md5": "^0.7.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "node-uuid": "^1.4.8",
+    "pg": "^7.12.1",
+    "reflect-metadata": "^0.1.13",
+    "shortid": "^2.2.15",
+    "type-graphql": "^0.17.4",
+    "typeorm": "^0.2.21",
+    "typeorm-typedi-extensions": "^0.2.3",
+    "uuid": "^3.3.3",
+    "xml-js": "^1.6.11",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@sentry/node": "^5.10.2",
+    "@types/amqplib": "^0.5.13",
+    "@types/ioredis": "^4.0.10",
+    "@types/ip": "^1.1.0",
+    "@types/joi": "^14.3.3",
+    "@types/lodash": "^4.14.123",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.10.5",
+    "@types/sequelize": "^4.27.48",
+    "@types/supertest": "^2.0.0",
+    "@types/uuid": "^3.4.5",
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.13.1",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.16.0",
+    "egg-ts-helper": "^1.25.5",
+    "husky": "^3.0.5",
+    "prettier": "^1.19.1",
+    "tsconfig-paths": "^3.8.0",
+    "tslib": "^1.9.0",
+    "tslint": "^5.0.0",
+    "tslint-config-egg": "^1.0.0",
+    "typescript": "^3.7.3"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "eslintIgnore": [
+    "coverage"
+  ],
+  "author": "",
+  "license": "MIT"
+}

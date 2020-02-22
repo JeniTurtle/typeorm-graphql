@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.build.json",
+  "exclude": [
+    "app/public",
+    "app/views",
+    "app/graphql/generated",
+    "node_modules*"
+  ]
+}

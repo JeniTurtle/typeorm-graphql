@@ -1,0 +1,64 @@
+{
+  "name": "egg-typeorm-graphql",
+  "version": "1.0.3",
+  "description": "Typeorm and GraphQL plugin for egg",
+  "eggPlugin": {
+    "name": "typeorm_graphql"
+  },
+  "keywords": [
+    "egg",
+    "eggPlugin",
+    "egg-plugin",
+    "typeorm",
+    "graphql"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "apollo-link-error": "^1.1.12",
+    "apollo-link-http": "^1.5.16",
+    "apollo-server-koa": "^2.8.1",
+    "caller": "^1.0.1",
+    "class-validator": "^0.9.1",
+    "cross-fetch": "^3.0.4",
+    "dataloader": "^2.0.0",
+    "egg": "^2.6.1",
+    "fs-jetpack": "^2.2.2",
+    "graphql-binding": "^2.5.2",
+    "graphql-fields": "^2.0.3",
+    "graphql-query-complexity": "^0.3.0",
+    "graphql-type-json": "^0.3.1",
+    "is-type-of": "^1.2.1",
+    "lodash": "^4.17.15",
+    "node-uuid": "^1.4.8",
+    "pg": "^7.12.1",
+    "prettier": "^1.19.1",
+    "reflect-metadata": "^0.1.13",
+    "shortid": "^2.2.15",
+    "type-graphql": "^0.17.4",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.21",
+    "typeorm-typedi-extensions": "^0.2.3",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.123",
+    "@types/node": "^7.10.5",
+    "@types/uuid": "^3.4.5",
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.13.1",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.16.0",
+    "egg-ts-helper": "^1.25.5",
+    "tsconfig-paths": "^3.8.0",
+    "tslib": "^1.9.0",
+    "tslint": "^5.0.0",
+    "tslint-config-egg": "^1.0.0",
+    "typescript": "^3.7.3"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  }
+}
